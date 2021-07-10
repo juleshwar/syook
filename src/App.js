@@ -1,18 +1,18 @@
-import { Component } from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LoginPage from "./components/LoginPage";
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={LoginPage}></Route>
-          <Route exact path="/login" component={LoginPage}></Route>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
+function App() {
+  // const isLoggedIn = useSelector((state) => state.currentUser.loggedIn);
+  // console.log(isLoggedIn);
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={LoginPage}></Route>
+        <Route exact path="/login" component={LoginPage}></Route>
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
