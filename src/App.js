@@ -1,16 +1,18 @@
-import React from "react";
-import { hot } from 'react-hot-loader/root';
+import { Component } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import LoginPage from "./components/LoginPage";
 
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
-      <>
-        <h1 className="text-4xl text-white bg-black">
-          Hello world!
-        </h1>
-      </>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={LoginPage}></Route>
+          <Route exact path="/login" component={LoginPage}></Route>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
 
-export default hot(App);
+export default App;
