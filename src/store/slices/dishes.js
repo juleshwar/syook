@@ -4,9 +4,9 @@ import DISHES from "../../constants/dishes";
 import { VOTE } from "../../constants/vote";
 
 const rankToPointsMap = new Map([
-  [[VOTE.GOLD], 30],
-  [[VOTE.SILVER], 20],
-  [[VOTE.BRONZE], 10],
+  [VOTE.GOLD, 30],
+  [VOTE.SILVER, 20],
+  [VOTE.BRONZE, 10],
 ]);
 
 const findDish = (dishes, dishId) => {
