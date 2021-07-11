@@ -25,14 +25,14 @@ const dishesSlice = createSlice({
       const { dishId, rank } = payload;
       const dish = findDish(state, dishId);
       if (dish) {
-        dish.points += rankToPointsMap.get(rank);
+        dish.points += rankToPointsMap.get(rank) || 0;
       }
     },
     removeRank: (state, { payload }) => {
       const { dishId, rank } = payload;
       const dish = findDish(state, dishId);
       if (dish) {
-        dish.points -= rankToPointsMap.get(rank);
+        dish.points -= rankToPointsMap.get(rank) || 0;
       }
     },
     sortDishesInDescendingOrder: (state) => {
