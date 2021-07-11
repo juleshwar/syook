@@ -1,15 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./ui/Button";
 import InputWithLabel from "./ui/InputWithLabel";
 import AuthenticationService from "../services/AuthenticationService";
+import { actions as currentUserActions } from "../store/slices/currentUser";
+import { useDispatch, useSelector } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-function LoginPage() {
+function LoginPage({ history }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.currentUser.loggedIn);
+
+  useEffect(() => {
+    if (isLoggedIn && history.location.pathname === "/login") {
+      history.goBack();
+    }
+  })
+
   function onClickSubmit(user, e) {
     e.preventDefault();
     if (AuthenticationService.authenticateUserCredentials(user)) {
-      console.log("login");
+      dispatch(currentUserActions.logInUser(user));
+      history.push("/dashboard");
     }
   }
   return (
@@ -45,4 +58,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);
