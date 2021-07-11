@@ -21,21 +21,19 @@ const dishesSlice = createSlice({
     return d;
   }),
   reducers: {
-    setRank: (state, dishId, rank) => {
+    setRank: (state, { payload }) => {
+      const { dishId, rank } = payload;
       const dish = findDish(state, dishId);
       if (dish) {
         dish.points += rankToPointsMap.get(rank);
       }
-      const dispatch = useDispatch();
-      dispatch(dishesActions.sortDishesInDescendingOrder());
     },
-    removeRank: (state, dishId, rank) => {
+    removeRank: (state, { payload }) => {
+      const { dishId, rank } = payload;
       const dish = findDish(state, dishId);
       if (dish) {
         dish.points -= rankToPointsMap.get(rank);
       }
-      const dispatch = useDispatch();
-      dispatch(dishesActions.sortDishesInDescendingOrder());
     },
     sortDishesInDescendingOrder: (state) => {
       state.sort((dishA, dishB) => {
