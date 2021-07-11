@@ -36,29 +36,26 @@ function VoteOption({ type, children, state, onClick }) {
 
 function VoteBlock({ state, onClickHandler }) {
   const blockState = { ...defaultBlockState, ...state };
-  const onClick = (rank) => {
-    onClickHandler(rank);
-  };
   return (
     <div className="grid grid-cols-3 gap-2 select-none">
       <VoteOption
         type={VOTE.GOLD}
         state={blockState[VOTE.GOLD]}
-        onClick={onClick}
+        onClick={onClickHandler}
       >
         🥇
       </VoteOption>
       <VoteOption
         type={VOTE.SILVER}
         state={blockState[VOTE.SILVER]}
-        onClick={onClick}
+        onClick={onClickHandler}
       >
         🥈
       </VoteOption>
       <VoteOption
         type={VOTE.BRONZE}
         state={blockState[VOTE.BRONZE]}
-        onClick={onClick}
+        onClick={onClickHandler}
       >
         🥉
       </VoteOption>
