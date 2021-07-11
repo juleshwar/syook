@@ -20,6 +20,10 @@ const currentUserSlice = createSlice({
       const { rank, dishId } = payload;
       state.votedDishes[rank] = dishId;
     },
+    resetVote: (state, { payload }) => {
+      const { rank } = payload;
+      delete state.votedDishes[rank];
+    },
   },
 });
 
