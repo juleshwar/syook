@@ -1,8 +1,17 @@
 import { Switch, Route, withRouter } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import DashboardPage from "./components/DashboardPage";
 import LoginPage from "./components/LoginPage";
 
-function App() {
+function App({ history }) {
+  const isLoggedIn = useSelector((state) => state.currentUser.loggedIn);
+  useEffect(() => {
+    if (!isLoggedIn && history.location.pathname !== "/login") {
+      history.push("/login");
+    }
+  });
+
   return (
     <Switch>
       <Route exact path="/login" component={LoginPage}></Route>
@@ -11,4 +20,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);
