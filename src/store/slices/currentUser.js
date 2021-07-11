@@ -5,7 +5,6 @@ const currentUserSlice = createSlice({
   initialState: {
     user: null,
     loggedIn: false,
-    votedDishes: {},
   },
   reducers: {
     logInUser: (state, { payload }) => {
@@ -18,11 +17,11 @@ const currentUserSlice = createSlice({
     },
     voteDish: (state, { payload }) => {
       const { rank, dishId } = payload;
-      state.votedDishes[rank] = dishId;
+      state.user.votedDishes[rank] = dishId;
     },
     resetVote: (state, { payload }) => {
       const { rank } = payload;
-      delete state.votedDishes[rank];
+      delete state.user.votedDishes[rank];
     },
   },
 });
