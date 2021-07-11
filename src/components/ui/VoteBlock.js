@@ -34,7 +34,7 @@ function VoteOption({ type, children, state, onClick }) {
   );
 }
 
-function VoteBlock({ onClickHandler, state }) {
+function VoteBlock({ state, onClickHandler }) {
   const blockState = { ...defaultBlockState, ...state };
   const onClick = (rank) => {
     onClickHandler(rank);
