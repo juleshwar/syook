@@ -16,6 +16,7 @@ const dishesSlice = createSlice({
   name: "dishes",
   initialState: DISHES.map((d) => {
     d.points = 0;
+    d.rank = 1;
     return d;
   }),
   reducers: {
