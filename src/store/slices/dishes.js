@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import DISHES from "../../constants/dishes";
+import { VOTE } from "../../constants/vote";
 
 const rankToPointsMap = new Map([
-  [1, 30],
-  [2, 20],
-  [3, 10],
+  [[VOTE.GOLD], 30],
+  [[VOTE.SILVER], 20],
+  [[VOTE.BRONZE], 10],
 ]);
 
 const findDish = (dishes, dishId) => {
