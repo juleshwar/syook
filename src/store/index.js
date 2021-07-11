@@ -6,5 +6,6 @@ export default createStore(
   combineReducers({
     currentUser: currentUserSlice,
     dishes: dishesSlice,
-  })
+  }),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
