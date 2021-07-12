@@ -1,6 +1,6 @@
 # syook-assignment
 
-Empty project.
+Deployed at https://syook-assignment.surge.sh
 
 ## Building and running on localhost
 
