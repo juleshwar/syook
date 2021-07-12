@@ -1,6 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import USERS from "../../constants/users";
 
+const updateUserVotedDishesState = ({ allUsers, currentUser }) => {
+  for (let i = 0; i < allUsers.length; i++) {
+    let user = allUsers[i];
+    if (user.id === currentUser.id) {
+      user.votedDishes = currentUser.votedDishes;
+      break;
+    }
+  }
+};
+
 const usersSlice = createSlice({
   name: "users",
   initialState: {
@@ -19,6 +29,7 @@ const usersSlice = createSlice({
       state.loggedIn = true;
     },
     logOutUser: (state) => {
+      updateUserVotedDishesState(state);
       state.currentUser = null;
       state.loggedIn = false;
     },
