@@ -25,7 +25,7 @@ function VoteOption({ type, children, state, onClick }) {
     <span
       className={`py-2 rounded border text-2xl no-s 
       ${isSelected(state) ? "bg-green-500" : ""}
-      ${isDimmed(state) ? "bg-yellow-100" : ""}
+      ${isDimmed(state) ? "opacity-50" : ""}
       `}
       onClick={onClick.bind(this, type)}
     >
