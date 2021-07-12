@@ -1,24 +1,25 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { actions as currentUserActions } from "../store/slices/currentUser";
+import { usersActions } from "../store/slices/users";
 
 function DashboardPage({ history }) {
   const dishes = useSelector((state) => state.dishes);
   const headerCellClasses = "text-xl font-bold text-center border p-2 w-1/4";
   const rowCellClasses = "text-l text-center border p-2";
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.currentUser);  
+  const currentUser = useSelector((state) => state.users.currentUser);
+  const isLoggedIn = useSelector((state) => state.users.loggedIn);
 
-  const signOut = () => {
-    dispatch(currentUserActions.logOutUser());
+  function signOut() {
+    dispatch(usersActions.logOutUser());
     history.push("/login");
   };
 
   return (
     <section className="flex flex-col items-center">
       <nav className="flex w-full h-16 text-lg items-center justify-between bg-red-100 p-4">
-        <span>Hi {currentUser.user ? currentUser.user.username : ""}</span>
+        <span>Hi {isLoggedIn ? currentUser.username : ""}</span>
         <a href="#" onClick={signOut} className="underline text-blue-500">
           Sign out
         </a>
