@@ -5,6 +5,7 @@ import { VOTE } from "../constants/vote";
 import { usersActions } from "../store/slices/users";
 import { dishesActions } from "../store/slices/dishes";
 import VoteBlock, { VOTE_STATE } from "./ui/VoteBlock";
+import Button from "./ui/Button";
 
 function DashboardPage({ history }) {
   const dishes = useSelector((state) => state.dishes);
@@ -17,6 +18,7 @@ function DashboardPage({ history }) {
 
   function signOut() {
     dispatch(usersActions.logOutUser());
+    reorderLeaderboard()
     history.push("/login");
   }
 
@@ -58,6 +60,16 @@ function DashboardPage({ history }) {
     dispatch(dishesActions.setRank({ dishId, rank }));
   }
 
+  function reorderLeaderboard() {
+    const leaderboardTable = document.getElementById("leaderboard-table");
+    leaderboardTable.classList.add("animate-pulse", "events-none");
+
+    setTimeout(() => {
+      dispatch(dishesActions.sortDishesInDescendingOrder());
+      leaderboardTable.classList.remove("animate-pulse", "events-none");
+    }, 300);
+  }
+
   function getVoteBlockState(votedDishes, dishId) {
     if (!isLoggedIn) {
       return {};
@@ -88,8 +100,29 @@ function DashboardPage({ history }) {
         </a>
       </nav>
       <div className="mt-8 w-full flex flex-col items-center">
-        <h3 className="text-2xl">Dashboard</h3>
-        <table className="mt-8 w-3/5 border border-gray-400 collapse">
+        <div className="text-2xl relative">
+          Dashboard
+          <Button
+            classes="bg-white border-none ml-3"
+            buttonProps={{ onClick: reorderLeaderboard }}
+          >
+            🔁
+          </Button>
+          <span
+            className="absolute animate-pulse text-gray-500 text-sm w-full"
+            style={{
+              left: "100%",
+              top: "50%",
+              transform: 'translateY(-50%)',
+            }}
+          >
+            Click this button to update the leaderboard
+          </span>
+        </div>
+        <table
+          id="leaderboard-table"
+          className="mt-8 w-3/5 border border-gray-400 collapse"
+        >
           <thead>
             <tr>
               <td className={headerCellClasses}>Image</td>
