@@ -10,11 +10,50 @@ function DashboardPage({ history }) {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.users.currentUser);
   const isLoggedIn = useSelector((state) => state.users.loggedIn);
+  const votedDishes = currentUser?.votedDishes;
 
   function signOut() {
     dispatch(usersActions.logOutUser());
     history.push("/login");
-  };
+  }
+
+  function onVote(votedDishes, dishId, rank) {
+    if (!isLoggedIn) {
+      return false;
+    }
+    if (votedDishes[rank] === dishId) {
+      /**
+       * if the same dish has already been given the @argument rank, do nothing
+       */
+      return;
+    }
+
+    const alreadyRankedDishes = Object.entries(votedDishes).map(([r, d]) => d);
+    if (alreadyRankedDishes.includes(dishId)) {
+      /**
+       * if the same @argument dishId has been assigned a rank already, remove the rank for that dish
+       * Also remove the @argument dishId's mapping in votedDishes i.e clear the votedDishes's rank
+       */
+      /**
+       * @var rankOfDish is finding the rank of the dish with id @argument dishId within @argument votedDishes
+       */
+
+      const rankOfDish = +Object.entries(votedDishes).find(
+        ([r, d]) => d === dishId
+      )[0];
+      dispatch(dishesActions.removeRank({ dishId, rank: rankOfDish }));
+      dispatch(usersActions.resetVote({ rank: rankOfDish }));
+    }
+    if (votedDishes[rank]) {
+      /**
+       * if a dish has already been selected for that @argument rank, remove the rank for that dish
+       */
+
+      dispatch(dishesActions.removeRank({ dishId: votedDishes[rank], rank }));
+    }
+    dispatch(usersActions.voteDish({ dishId, rank }));
+    dispatch(dishesActions.setRank({ dishId, rank }));
+  }
 
   return (
     <section className="flex flex-col items-center">
