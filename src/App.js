@@ -5,7 +5,7 @@ import DashboardPage from "./components/DashboardPage";
 import LoginPage from "./components/LoginPage";
 
 function App({ history }) {
-  const isLoggedIn = useSelector((state) => state.currentUser.loggedIn);
+  const isLoggedIn = useSelector((state) => state.users.loggedIn);
   useEffect(() => {
     if (!isLoggedIn && history.location.pathname !== "/login") {
       history.push("/login");
