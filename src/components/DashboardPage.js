@@ -109,14 +109,7 @@ function DashboardPage({ history }) {
           >
             🔁
           </Button>
-          <span
-            className="absolute animate-pulse text-gray-500 text-sm w-full"
-            style={{
-              left: "100%",
-              top: "50%",
-              transform: 'translateY(-50%)',
-            }}
-          >
+          <span className="absolute animate-pulse text-gray-500 text-sm w-full top-1/2 left-full transform -translate-y-1/2">
             Click this button to update the leaderboard
           </span>
         </div>
