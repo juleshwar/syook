@@ -19,11 +19,17 @@ function LoginPage({ history }) {
     }
   });
 
-  function onClickSubmit(user, e) {
+  function onClickSubmit(userDetails, e) {
     e.preventDefault();
-    if (AuthenticationService.authenticateUserCredentials(user)) {
-      dispatch(currentUserActions.logInUser(user));
-      history.push("/dashboard");
+    try {
+      if (AuthenticationService.authenticateUserCredentials(userDetails)) {
+        dispatch(usersActions.logInUser(userDetails));
+        history.push("/dashboard");
+      } else {
+        window.alert("Wrong credentials. Sorry!");
+      }
+    } catch (error) {
+      window.alert(error);
     }
   }
   return (
