@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "./ui/Button";
 import InputWithLabel from "./ui/InputWithLabel";
 import AuthenticationService from "../services/AuthenticationService";
-import { actions as currentUserActions } from "../store/slices/currentUser";
+import { usersActions } from "../store/slices/users";
 import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -10,13 +10,14 @@ function LoginPage({ history }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.currentUser.loggedIn);
+
+  const isLoggedIn = useSelector((state) => state.users.loggedIn);
 
   useEffect(() => {
     if (isLoggedIn && history.location.pathname === "/login") {
       history.goBack();
     }
-  })
+  });
 
   function onClickSubmit(user, e) {
     e.preventDefault();
