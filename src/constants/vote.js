@@ -4,4 +4,10 @@ const VOTE = {
   BRONZE: 3,
 };
 
-export { VOTE };
+const VOTE_MEDAL_MAP = {
+  [VOTE.GOLD]: "🥇",
+  [VOTE.SILVER]: "🥈",
+  [VOTE.BRONZE]: "🥉",
+};
+
+export { VOTE, VOTE_MEDAL_MAP };

@@ -1,4 +1,4 @@
-import { VOTE } from "../../constants/vote";
+import { VOTE, VOTE_MEDAL_MAP } from "../../constants/vote";
 
 const VOTE_STATE = {
   SELECTED: 1, // Current block has this vote
@@ -43,21 +43,21 @@ function VoteBlock({ state, onClickHandler }) {
         state={blockState[VOTE.GOLD]}
         onClick={onClickHandler}
       >
-        🥇
+        {VOTE_MEDAL_MAP[VOTE.GOLD]}
       </VoteOption>
       <VoteOption
         type={VOTE.SILVER}
         state={blockState[VOTE.SILVER]}
         onClick={onClickHandler}
       >
-        🥈
+        {VOTE_MEDAL_MAP[VOTE.SILVER]}
       </VoteOption>
       <VoteOption
         type={VOTE.BRONZE}
         state={blockState[VOTE.BRONZE]}
         onClick={onClickHandler}
       >
-        🥉
+        {VOTE_MEDAL_MAP[VOTE.BRONZE]}
       </VoteOption>
     </div>
   );
