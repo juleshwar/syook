@@ -6,6 +6,7 @@ import { usersActions } from "../store/slices/users";
 import { dishesActions } from "../store/slices/dishes";
 import VoteBlock, { VOTE_STATE } from "./ui/VoteBlock";
 import Button from "./ui/Button";
+import UserVotes from "./UserVotes";
 
 function DashboardPage({ history }) {
   const dishes = useSelector((state) => state.dishes);
@@ -18,7 +19,7 @@ function DashboardPage({ history }) {
 
   function signOut() {
     dispatch(usersActions.logOutUser());
-    reorderLeaderboard()
+    reorderLeaderboard();
     history.push("/login");
   }
 
@@ -151,6 +152,9 @@ function DashboardPage({ history }) {
             ))}
           </tbody>
         </table>
+        <div className="fixed right-10 top-1/2 transform -translate-y-1/2">
+          {votedDishes && <UserVotes votedDishes={votedDishes} />}
+        </div>
       </div>
     </section>
   );
